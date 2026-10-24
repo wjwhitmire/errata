@@ -1,0 +1,13 @@
+# Security and privacy
+
+Credit reports carry Social Security numbers, dates of birth, account numbers and addresses. This tool is built so that none of it leaves your device.
+
+- **No network by default.** The page makes no request of any kind with its switches off: no analytics, no fonts from a font service, no update checks. Every optional network feature (the text reader's language data, an on-device writing helper, a writing helper service with your own key, an online certified mail service with your own key) sits behind its own switch, off by default, and goes through one gate function that allows only that feature's listed hosts. A headless test visits every screen with every switch off and fails on any outside request. The Pages build adds a Content-Security-Policy as a second wall (scripts only by hash or the one pinned library; connections only over https or to a model server on this computer, which the gate narrows to the one address you set) and refuses to run inside another site's frame.
+- **Encrypted at rest.** Reports, letters and vault files are stored in your browser's IndexedDB, encrypted with AES-GCM under a key made from your passphrase (PBKDF2 with SHA-256, 600,000 rounds). Encryption is on by default. There is no passphrase recovery: without it, nobody can open the data, including you. The app locks itself after 1, 5 or 15 minutes of inactivity. Each person in family mode has their own passphrase; only names, initials and relationships stay readable so the switcher can show who is who. The example family is kept in memory only.
+- **Least disclosure in letters.** Letters to the credit bureaus carry your date of birth and the last four digits of your SSN, which the bureaus ask for. Letters to lenders and collectors never do. A full SSN never appears anywhere. A test enforces both rules.
+- **No code from reports.** Report text is data. It is never evaluated, never put into the page as markup, and, when an optional model is used, it is sent as quoted data with instructions that it is not to be followed.
+- **Export and delete.** Settings exports an encrypted backup (the records exactly as stored) and deletes everything from this browser, including any downloaded language or model files, after you type DELETE.
+- **The command line** reads only the files you name and writes only the file you pass with `--out`. It never makes network requests.
+- **Nothing personal in the repository.** Every test report is synthetic and labeled as invented. Local working folders (`local/`, `scratch/`) and files named `*.local.pdf` or `*.local.json` are ignored by git.
+
+Report a security issue by opening a private security advisory on the repository, or an issue that does not include any personal data.

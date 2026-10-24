@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.venv/
+venv/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Secrets
+.env*
+
+# Screenshots (tools/shoot.py)
+shots/
+
+# Local scratch: real reports, letters and anything made from them never enter the repository
+local/
+scratch/
+*.local.pdf
+*.local.json
+
